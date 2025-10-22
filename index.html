@@ -247,12 +247,8 @@
 
       <div class="fun-facts">
         <h3>House Rules</h3>
-        <ul>
-          <li>Packets checked at the door. Leave your baggage at Layer 2.</li>
-          <li>We don't do buffering. Life's too short for spinning wheels.</li>
-          <li>All connections are secure. We take trust issues seriously.</li>
-          <li>Drama? That's what error logs are for.</li>
-          <li>Ping us. We'll pong back. Probably.</li>
+        <ul id="rules-list">
+          <!-- Rules populated by JavaScript -->
         </ul>
       </div>
 
@@ -272,6 +268,61 @@
   </div>
 
   <script>
+    // Random jokes generator
+    const allJokes = [
+      "Packets checked at the door. Leave your baggage at Layer 2.",
+      "We don't do buffering. Life's too short for spinning wheels.",
+      "All connections are secure. We take trust issues seriously.",
+      "Drama? That's what error logs are for.",
+      "Ping us. We'll pong back. Probably.",
+      "Our uptime is higher than your expectations. And that's saying something.",
+      "404: Social life not found. But hey, our network's lit.",
+      "We run on TCP/IP and good vibes only.",
+      "Firewall keeps the heat out. AC keeps it cool. We're paradoxical like that.",
+      "Bandwidth is unlimited. Your attention span? Not our problem.",
+      "No DHCP drama here. Everyone gets an IP, no one gets special treatment.",
+      "Our cache is always fresh. Unlike your dating profile.",
+      "SSL certified and emotionally available (for packets only).",
+      "VPN? More like Very Private Nerds. And we're proud.",
+      "DNS: We know where everyone is. It's not creepy, it's networking.",
+      "Routing decisions faster than your life choices.",
+      "We believe in load balancing. Both servers and life.",
+      "Subnet mask on, game face on. Let's route.",
+      "ICMP: We send error messages, not mixed signals.",
+      "Our throughput is legendary. Our coffee consumption more so.",
+      "MAC addresses only. No PCs, just vibes.",
+      "We're Layer 7 sophistication with Layer 1 authenticity.",
+      "Jitter? We don't shake. We're steady as a routing table.",
+      "QoS enabled: Quality of Service, Quality of Snacks.",
+      "NAT-ural selection at work. Only the best packets survive.",
+      "Our network topology is more connected than your social circle.",
+      "Encryption so strong, even we forget the password sometimes.",
+      "Gateway to success. Literally. It's a router.",
+      "Broadcast storms? We prefer light drizzle.",
+      "TCP handshake: The only handshake we trust these days."
+    ];
+
+    // Function to get random jokes
+    function getRandomJokes(num) {
+      const shuffled = [...allJokes].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, num);
+    }
+
+    // Populate jokes on page load
+    function loadJokes() {
+      const rulesList = document.getElementById('rules-list');
+      const jokes = getRandomJokes(5);
+
+      jokes.forEach(joke => {
+        const li = document.createElement('li');
+        li.textContent = joke;
+        rulesList.appendChild(li);
+      });
+    }
+
+    // Load jokes when page loads
+    loadJokes();
+
     // Add some interactivity
     const badge = document.querySelector('.status-badge');
     const statuses = [
