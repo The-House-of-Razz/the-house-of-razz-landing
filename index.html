@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The House of Razz | Where Bandwidth Meets Banter</title>
+  <title>The House of Razz</title>
   <style>
     * {
       margin: 0;
@@ -11,25 +11,30 @@
       box-sizing: border-box;
     }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3); }
+      50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.5); }
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    @keyframes borderPulse {
+      0%, 100% { border-color: rgba(212, 175, 55, 0.3); }
+      50% { border-color: rgba(212, 175, 55, 0.6); }
     }
 
     body {
@@ -38,272 +43,299 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
+      background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: #d4af37;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Floating particles */
-    .particle {
+    body::before {
+      content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
       pointer-events: none;
-      animation: float 6s ease-in-out infinite;
     }
-
-    .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-    .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; width: 30px; height: 30px; }
-    .particle:nth-child(3) { top: 80%; left: 10%; animation-delay: 2s; width: 15px; height: 15px; }
-    .particle:nth-child(4) { top: 30%; left: 70%; animation-delay: 3s; width: 25px; height: 25px; }
-    .particle:nth-child(5) { top: 50%; left: 50%; animation-delay: 4s; }
 
     .container {
       text-align: center;
-      padding: 40px;
-      max-width: 800px;
+      padding: 60px 40px;
+      max-width: 900px;
       position: relative;
       z-index: 1;
     }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 60px 40px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      animation: fadeIn 1s ease-out;
+    .emblem {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 40px;
+      position: relative;
+      animation: fadeInUp 1s ease-out;
     }
 
-    .emoji {
-      font-size: 80px;
-      display: inline-block;
-      animation: pulse 2s ease-in-out infinite;
-      margin-bottom: 20px;
+    .emblem::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border: 3px solid rgba(212, 175, 55, 0.4);
+      border-radius: 20px;
+      animation: borderPulse 3s ease-in-out infinite;
+    }
+
+    .emblem::after {
+      content: 'R';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      color: #d4af37;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
     }
 
     h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
+      font-size: 4rem;
+      font-weight: 300;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      letter-spacing: -1px;
-      animation: fadeIn 1s ease-out 0.2s both;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      animation: fadeInUp 1s ease-out 0.2s both, glow 4s ease-in-out infinite;
+      font-family: 'Georgia', serif;
     }
 
-    .subtitle {
+    .divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      margin: 30px auto;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .tagline {
       font-size: 1.5rem;
-      margin-bottom: 30px;
-      opacity: 0.95;
-      font-weight: 300;
+      margin-bottom: 40px;
+      color: #b8956a;
       font-style: italic;
-      animation: fadeIn 1s ease-out 0.4s both;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease-out 0.6s both;
     }
 
     .description {
       font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 30px;
-      opacity: 0.9;
-      animation: fadeIn 1s ease-out 0.6s both;
+      line-height: 2;
+      margin-bottom: 50px;
+      color: #c9c9c9;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Palatino', 'Book Antiqua', serif;
+      animation: fadeInUp 1s ease-out 0.8s both;
     }
 
-    .fun-facts {
-      margin: 30px 0;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      animation: fadeIn 1s ease-out 0.8s both;
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+      animation: fadeInUp 1s ease-out 1s both;
     }
 
-    .fun-facts h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: #ffd700;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    .principle {
+      padding: 30px;
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .fun-facts ul {
-      list-style: none;
-      padding: 0;
+    .principle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+      transition: left 0.6s ease;
     }
 
-    .fun-facts li {
-      margin: 10px 0;
-      font-size: 1rem;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      transition: all 0.3s ease;
+    .principle:hover::before {
+      left: 100%;
     }
 
-    .fun-facts li:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateX(10px);
+    .principle:hover {
+      background: rgba(212, 175, 55, 0.08);
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-5px);
     }
 
-    .fun-facts li::before {
-      content: "✨ ";
-      margin-right: 8px;
-    }
-
-    .cta-section {
-      margin-top: 40px;
-      animation: fadeIn 1s ease-out 1s both;
-    }
-
-    .cta-text {
+    .principle-title {
       font-size: 1.2rem;
       margin-bottom: 15px;
-      font-weight: 500;
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 12px 30px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
+      color: #d4af37;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       font-weight: 600;
-      font-size: 1rem;
-      margin-top: 10px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
+      font-family: 'Georgia', serif;
     }
 
-    .status-badge:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
-      box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+    .principle-desc {
+      color: #a8a8a8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-family: 'Palatino', serif;
+    }
+
+    .status-section {
+      margin-top: 60px;
+      padding: 40px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      animation: fadeInUp 1s ease-out 1.2s both;
+    }
+
+    .status-text {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 15px;
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      color: #d4af37;
+      letter-spacing: 2px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: #d4af37;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+      animation: glow 2s ease-in-out infinite;
     }
 
     .footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      opacity: 0.7;
-      animation: fadeIn 1s ease-out 1.2s both;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #666;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease-out 1.4s both;
+      font-family: 'Palatino', serif;
+    }
+
+    .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: #444;
+      margin: 20px auto;
     }
 
     @media (max-width: 768px) {
       h1 {
         font-size: 2.5rem;
+        letter-spacing: 4px;
       }
 
-      .subtitle {
+      .tagline {
         font-size: 1.2rem;
       }
 
-      .emoji {
-        font-size: 60px;
-      }
-
-      .glass-card {
+      .container {
         padding: 40px 20px;
       }
 
-      .description {
-        font-size: 1rem;
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .emblem {
+        width: 100px;
+        height: 100px;
+      }
+
+      .emblem::after {
+        font-size: 52px;
       }
     }
 
-    /* Easter egg hover effect */
-    .emoji:hover {
-      animation: none;
-      transform: rotate(360deg);
-      transition: transform 0.6s ease;
+    /* Subtle cursor effect */
+    .principle {
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <!-- Floating particles -->
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-
   <div class="container">
-    <div class="glass-card">
-      <div class="emoji">🎭</div>
+    <div class="emblem"></div>
 
-      <h1>The House of Razz</h1>
+    <h1>The House of Razz</h1>
 
-      <div class="subtitle">
-        Where Bandwidth Meets Banter™
-      </div>
+    <div class="divider"></div>
 
-      <div class="description">
-        Welcome to the most exclusive network on the internet.
-        No velvet ropes, but we do have <em>excellent</em> latency.
-      </div>
+    <div class="tagline">
+      Where Excellence is Standard
+    </div>
 
-      <div class="fun-facts">
-        <h3>House Rules</h3>
-        <ul>
-          <li>Packets checked at the door. Leave your baggage at Layer 2.</li>
-          <li>We don't do buffering. Life's too short for spinning wheels.</li>
-          <li>All connections are secure. We take trust issues seriously.</li>
-          <li>Drama? That's what error logs are for.</li>
-          <li>Ping us. We'll pong back. Probably.</li>
-        </ul>
-      </div>
+    <div class="description">
+      An exclusive digital establishment built on the principles of precision, performance, and refined execution.
+      We curate connections with the same attention to detail as a master craftsman.
+    </div>
 
-      <div class="cta-section">
-        <div class="cta-text">
-          Currently operating at peak performance
-        </div>
-        <div class="status-badge">
-          🟢 Status: Vibing
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-title">Precision</div>
+        <div class="principle-desc">
+          Every packet routed with purpose. Every connection authenticated with care.
         </div>
       </div>
 
-      <div class="footer">
-        Est. 2025 | Powered by caffeine and questionable decisions
+      <div class="principle">
+        <div class="principle-title">Performance</div>
+        <div class="principle-desc">
+          Engineered for zero compromise. Optimized for maximum throughput.
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-title">Privacy</div>
+        <div class="principle-desc">
+          Your data remains yours. Encrypted end-to-end, protected by design.
+        </div>
       </div>
     </div>
+
+    <div class="status-section">
+      <div class="status-text">Network Status</div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Operational</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-divider"></div>
+      Est. MMXXV
+    </div>
   </div>
-
-  <script>
-    // Add some interactivity
-    const badge = document.querySelector('.status-badge');
-    const statuses = [
-      '🟢 Status: Vibing',
-      '🎵 Status: In the Zone',
-      '🚀 Status: Absolutely Sending It',
-      '☕ Status: Caffeinated',
-      '🎯 Status: Locked In'
-    ];
-    let currentIndex = 0;
-
-    badge.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % statuses.length;
-      badge.textContent = statuses[currentIndex];
-      badge.style.animation = 'pulse 0.3s ease';
-      setTimeout(() => {
-        badge.style.animation = '';
-      }, 300);
-    });
-
-    // Create more particles dynamically
-    for (let i = 0; i < 10; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.top = Math.random() * 100 + '%';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.width = (Math.random() * 20 + 10) + 'px';
-      particle.style.height = particle.style.width;
-      particle.style.animationDelay = Math.random() * 5 + 's';
-      particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-      document.body.appendChild(particle);
-    }
-  </script>
 </body>
 </html>
